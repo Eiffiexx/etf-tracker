@@ -1,0 +1,146 @@
+[
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Fund NAV",
+    "Metric": "1 Mo",
+    "Value": 4.12,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Fund NAV",
+    "Metric": "3 Mo",
+    "Value": 6.44,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Fund NAV",
+    "Metric": "YTD",
+    "Value": 3.88,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Fund NAV",
+    "Metric": "1 Yr",
+    "Value": 38.2,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Fund NAV",
+    "Metric": "3 Yr",
+    "Value": 4.36,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Fund NAV",
+    "Metric": "5 Yr",
+    "Value": -1.76,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Closing Price",
+    "Metric": "1 Mo",
+    "Value": 4.24,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Closing Price",
+    "Metric": "3 Mo",
+    "Value": 6.39,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Closing Price",
+    "Metric": "YTD",
+    "Value": 4.28,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Closing Price",
+    "Metric": "1 Yr",
+    "Value": 38.46,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Closing Price",
+    "Metric": "3 Yr",
+    "Value": 4.74,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Closing Price",
+    "Metric": "5 Yr",
+    "Value": -1.73,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Underlying Index",
+    "Metric": "1 Mo",
+    "Value": 4.19,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Underlying Index",
+    "Metric": "3 Mo",
+    "Value": 6.72,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Underlying Index",
+    "Metric": "YTD",
+    "Value": 4.0,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Underlying Index",
+    "Metric": "1 Yr",
+    "Value": 52.14,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Underlying Index",
+    "Metric": "3 Yr",
+    "Value": 5.8,
+    "AsOf": "02/27/2026"
+  },
+  {
+    "SourceFile": "kmlm.pdf",
+    "Page": 1,
+    "Series": "Underlying Index",
+    "Metric": "5 Yr",
+    "Value": -0.74,
+    "AsOf": "02/27/2026"
+  }
+]
