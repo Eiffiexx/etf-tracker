@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 import pandas as pd
 
 from etf_extractors.base import BaseETFExtractor
@@ -45,6 +47,7 @@ class BlueprintExtractor(BaseETFExtractor):
         df["source"] = self.source_name
         df["fund"] = self.fund_code.upper()
 
+        # -------- clean numeric fields --------
         if "weight_pct" in df.columns:
             df["weight_pct"] = (
                 df["weight_pct"]
@@ -74,17 +77,96 @@ class BlueprintExtractor(BaseETFExtractor):
                 )
                 df[col] = pd.to_numeric(df[col], errors="coerce")
 
-        # Unified final schema
-        final_df = pd.DataFrame({
-            "source": df["source"],
-            "fund": df["fund"],
-            "as_of_date": df["as_of_date"] if "as_of_date" in df.columns else None,
-            "name": df["name"] if "name" in df.columns else None,
-            "ticker": df["ticker"] if "ticker" in df.columns else None,
-            "identifier": df["identifier"] if "identifier" in df.columns else None,
-            "weight_pct": df["weight_pct"] if "weight_pct" in df.columns else None,
-            "shares": df["shares"] if "shares" in df.columns else None,
-            "market_value": df["market_value"] if "market_value" in df.columns else None,
-        })
+        # -------- normalize ticker / identifier --------
+        if "ticker" in df.columns:
+            df["ticker"] = df["ticker"].astype(str).str.strip()
+        else:
+            df["ticker"] = None
 
-        return final_df
+        if "identifier" in df.columns:
+            df["identifier"] = df["identifier"].astype(str).str.strip()
+        else:
+            df["identifier"] = None
+
+        df["normalized_ticker"] = df["ticker"].apply(self._normalize_ticker)
+
+        # -------- classify instrument --------
+        df["instrument_type"] = df.apply(self._classify_instrument, axis=1)
+
+        # optional helper columns
+        df["option_type"] = df.apply(self._extract_option_type, axis=1)
+        df["is_derivative"] = df["instrument_type"].isin(["future", "option"])
+
+        final_cols = [
+            "source",
+            "fund",
+            "as_of_date",
+            "ticker",
+            "normalized_ticker",
+            "identifier",
+            "name",
+            "instrument_type",
+            "option_type",
+            "is_derivative",
+            "shares",
+            "price",
+            "market_value",
+            "weight_pct",
+        ]
+
+        final_cols = [c for c in final_cols if c in df.columns]
+        return df[final_cols]
+
+    @staticmethod
+    def _normalize_ticker(value: str) -> str | None:
+        if value is None:
+            return None
+
+        text = str(value).strip()
+        if text == "" or text.lower() == "nan":
+            return None
+
+        # remove suffixes commonly seen in futures/index rows
+        suffixes = [" COMDTY", " INDEX"]
+        for suffix in suffixes:
+            if text.endswith(suffix):
+                return text[: -len(suffix)].strip()
+
+        return text
+
+    @staticmethod
+    def _classify_instrument(row: pd.Series) -> str:
+        ticker = str(row.get("ticker", "")).upper()
+        name = str(row.get("name", "")).upper()
+        identifier = str(row.get("identifier", "")).upper()
+
+        # cash
+        if "CASH" in name:
+            return "cash"
+
+        # options: examples like "ADSK US 06/18/26 P250"
+        if re.search(r"\s[P|C]\d+(\.\d+)?\b", name):
+            return "option"
+
+        # futures
+        if "COMDTY" in ticker or "FUT" in name:
+            return "future"
+
+        # index futures / index products
+        if "INDEX" in ticker:
+            return "index"
+
+        # fallback
+        return "equity"
+
+    @staticmethod
+    def _extract_option_type(row: pd.Series) -> str | None:
+        name = str(row.get("name", "")).upper()
+
+        if re.search(r"\sP\d+(\.\d+)?\b", name):
+            return "put"
+
+        if re.search(r"\sC\d+(\.\d+)?\b", name):
+            return "call"
+
+        return None

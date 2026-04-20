@@ -1,33 +1,33 @@
-source,fund,as_of_date,section,name,identifier,position,weight_pct,current_exposure
-kraneshares,KMLM,02/27/2026,commodity,GOLD 100 OZ FUTR,JUN26 GCM6,Long,7.61,
-kraneshares,KMLM,02/27/2026,currency,AUDUSD CRNCY FUT,MAR26 ADH6,Long,16.5,
-kraneshares,KMLM,02/27/2026,commodity,NY HARB ULSD FUT,JUN26 HOM6,Long,7.2,
-kraneshares,KMLM,02/27/2026,currency,CHF CURRENCY FUT,MAR26 SFH6,Long,16.17,
-kraneshares,KMLM,02/27/2026,commodity,GASOLINE RBOB FUT,JUN26 XBM6,Long,7.15,
-kraneshares,KMLM,02/27/2026,currency,C$ CURRENCY FUT,MAR26 CDH6,Long,16.08,
-kraneshares,KMLM,02/27/2026,commodity,WTI CRUDE FUTURE,JUN26 CLM6,Long,6.98,
-kraneshares,KMLM,02/27/2026,currency,EURO FX CURR FUT,MAR26 ECH6,Long,16.04,
-kraneshares,KMLM,02/27/2026,commodity,CORN FUTURE MAY26,C K6,Short,6.93,
-kraneshares,KMLM,02/27/2026,currency,JPN YEN CURR FUT,MAR26 JYH6,Short,15.96,
-kraneshares,KMLM,02/27/2026,commodity,COPPER FUTURE,JUL26 HGN6,Long,6.84,
-kraneshares,KMLM,02/27/2026,currency,BP CURRENCY FUT,MAR26 BPH6,Long,15.9,
-kraneshares,KMLM,02/27/2026,commodity,SUGAR #11 (WORLD),MAY26 SBK6,Short,6.8,
-kraneshares,KMLM,02/27/2026,commodity,LIVE CATTLE FUTR,JUN26 LCM6,Long,6.69,
-kraneshares,KMLM,02/27/2026,fixed_income,SOYBEAN FUTURE MAY26,S K6,Long,5.27,
-kraneshares,KMLM,02/27/2026,fixed_income,JPN 10Y BOND(OSE),MAR26 JBH6,Short,25.36,
-kraneshares,KMLM,02/27/2026,fixed_income,NATURAL GAS FUTR JUN26,NGM26,Short,4.19,
-kraneshares,KMLM,02/27/2026,fixed_income,LONG GILT FUTURE JUN26,G M6,Long,20.84,
-kraneshares,KMLM,02/27/2026,fixed_income,WHEAT FUTURE(CBT) MAY26,W K6,Short,3.86,
-kraneshares,KMLM,02/27/2026,fixed_income,US 10YR ULTRA FUT JUN26,UXYM6,Long,18.55,
-kraneshares,KMLM,02/27/2026,fixed_income,CAN 10YR BOND FUT,JUN26 CNM6,Long,1.25,
-kraneshares,KMLM,02/27/2026,fixed_income,EURO-BUND FUTURE,MAR26 RXH6,Short,1.19,
-kraneshares,KMLM,02/27/2026,collateral,Cash,USD,,35.64,69311625.0
-kraneshares,KMLM,02/27/2026,collateral,B 03/31/26,US912797TB33,,13.84,26921047.0
-kraneshares,KMLM,02/27/2026,collateral,B 04/14/26,US912797TH03,,13.82,26882933.0
-kraneshares,KMLM,02/27/2026,collateral,B 04/30/26,US912797SN89,,13.8,26839439.0
-kraneshares,KMLM,02/27/2026,collateral,B 03/03/26,US912797ST59,,11.83,22997703.0
-kraneshares,KMLM,02/27/2026,collateral,B 03/19/26,US912797PV33,,11.81,22960737.0
-kraneshares,KMLM,02/27/2026,collateral,JAPANESE YEN,JPY,,0.71,1381853.0
-kraneshares,KMLM,02/27/2026,collateral,EURO,EUR,,-0.05,-100626.0
-kraneshares,KMLM,02/27/2026,collateral,BRITISH STERLING POUND,GBP,,-0.19,-359843.0
-kraneshares,KMLM,02/27/2026,collateral,CANADIAN DOLLAR,CAD,,-1.22,-2378840.0
+source,fund,as_of_date,section,normalized_ticker,identifier,name,instrument_type,option_type,is_derivative,position,weight_pct,current_exposure
+kraneshares,KMLM,02/27/2026,commodity,GCM6,JUN26 GCM6,GOLD 100 OZ FUTR,future,,True,Long,7.61,
+kraneshares,KMLM,02/27/2026,currency,ADH6,MAR26 ADH6,AUDUSD CRNCY FUT,future,,True,Long,16.5,
+kraneshares,KMLM,02/27/2026,commodity,HOM6,JUN26 HOM6,NY HARB ULSD FUT,future,,True,Long,7.2,
+kraneshares,KMLM,02/27/2026,currency,SFH6,MAR26 SFH6,CHF CURRENCY FUT,future,,True,Long,16.17,
+kraneshares,KMLM,02/27/2026,commodity,XBM6,JUN26 XBM6,GASOLINE RBOB FUT,future,,True,Long,7.15,
+kraneshares,KMLM,02/27/2026,currency,CDH6,MAR26 CDH6,C$ CURRENCY FUT,future,,True,Long,16.08,
+kraneshares,KMLM,02/27/2026,commodity,CLM6,JUN26 CLM6,WTI CRUDE FUTURE,future,,True,Long,6.98,
+kraneshares,KMLM,02/27/2026,currency,ECH6,MAR26 ECH6,EURO FX CURR FUT,future,,True,Long,16.04,
+kraneshares,KMLM,02/27/2026,commodity,K6,C K6,CORN FUTURE MAY26,future,,True,Short,6.93,
+kraneshares,KMLM,02/27/2026,currency,JYH6,MAR26 JYH6,JPN YEN CURR FUT,future,,True,Short,15.96,
+kraneshares,KMLM,02/27/2026,commodity,HGN6,JUL26 HGN6,COPPER FUTURE,future,,True,Long,6.84,
+kraneshares,KMLM,02/27/2026,currency,BPH6,MAR26 BPH6,BP CURRENCY FUT,future,,True,Long,15.9,
+kraneshares,KMLM,02/27/2026,commodity,SBK6,MAY26 SBK6,SUGAR #11 (WORLD),future,,True,Short,6.8,
+kraneshares,KMLM,02/27/2026,commodity,LCM6,JUN26 LCM6,LIVE CATTLE FUTR,future,,True,Long,6.69,
+kraneshares,KMLM,02/27/2026,fixed_income,K6,S K6,SOYBEAN FUTURE MAY26,future,,True,Long,5.27,
+kraneshares,KMLM,02/27/2026,fixed_income,JBH6,MAR26 JBH6,JPN 10Y BOND(OSE),future,,True,Short,25.36,
+kraneshares,KMLM,02/27/2026,fixed_income,NGM26,NGM26,NATURAL GAS FUTR JUN26,future,,True,Short,4.19,
+kraneshares,KMLM,02/27/2026,fixed_income,M6,G M6,LONG GILT FUTURE JUN26,future,,True,Long,20.84,
+kraneshares,KMLM,02/27/2026,fixed_income,K6,W K6,WHEAT FUTURE(CBT) MAY26,future,,True,Short,3.86,
+kraneshares,KMLM,02/27/2026,fixed_income,UXYM6,UXYM6,US 10YR ULTRA FUT JUN26,future,,True,Long,18.55,
+kraneshares,KMLM,02/27/2026,fixed_income,CNM6,JUN26 CNM6,CAN 10YR BOND FUT,future,,True,Long,1.25,
+kraneshares,KMLM,02/27/2026,fixed_income,RXH6,MAR26 RXH6,EURO-BUND FUTURE,future,,True,Short,1.19,
+kraneshares,KMLM,02/27/2026,collateral,USD,USD,Cash,cash_collateral,,False,,35.64,69311625.0
+kraneshares,KMLM,02/27/2026,collateral,US912797TB33,US912797TB33,B 03/31/26,cash_collateral,,False,,13.84,26921047.0
+kraneshares,KMLM,02/27/2026,collateral,US912797TH03,US912797TH03,B 04/14/26,cash_collateral,,False,,13.82,26882933.0
+kraneshares,KMLM,02/27/2026,collateral,US912797SN89,US912797SN89,B 04/30/26,cash_collateral,,False,,13.8,26839439.0
+kraneshares,KMLM,02/27/2026,collateral,US912797ST59,US912797ST59,B 03/03/26,cash_collateral,,False,,11.83,22997703.0
+kraneshares,KMLM,02/27/2026,collateral,US912797PV33,US912797PV33,B 03/19/26,cash_collateral,,False,,11.81,22960737.0
+kraneshares,KMLM,02/27/2026,collateral,JPY,JPY,JAPANESE YEN,currency,,False,,0.71,1381853.0
+kraneshares,KMLM,02/27/2026,collateral,EUR,EUR,EURO,currency,,False,,-0.05,-100626.0
+kraneshares,KMLM,02/27/2026,collateral,GBP,GBP,BRITISH STERLING POUND,currency,,False,,-0.19,-359843.0
+kraneshares,KMLM,02/27/2026,collateral,CAD,CAD,CANADIAN DOLLAR,currency,,False,,-1.22,-2378840.0

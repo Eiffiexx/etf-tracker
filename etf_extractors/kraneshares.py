@@ -26,8 +26,7 @@ class KraneSharesExtractor(BaseETFExtractor):
     def extract(self) -> pd.DataFrame:
         if not self.pdf_path.exists():
             raise RuntimeError(
-                f"KMLM PDF not found at: {self.pdf_path}. "
-                "Place kmlm.pdf in the project root."
+                f"KMLM PDF not found at: {self.pdf_path}. Place kmlm.pdf in the project root."
             )
 
         rows = self._extract_rows_from_pdf(self.pdf_path)
@@ -37,13 +36,23 @@ class KraneSharesExtractor(BaseETFExtractor):
 
         df = pd.DataFrame(rows)
 
+        # normalize ticker-like info from identifier
+        df["normalized_ticker"] = df["identifier"].apply(self._normalize_identifier)
+        df["instrument_type"] = df.apply(self._classify_instrument, axis=1)
+        df["option_type"] = None
+        df["is_derivative"] = df["instrument_type"].isin(["future", "option"])
+
         final_cols = [
             "source",
             "fund",
             "as_of_date",
             "section",
-            "name",
+            "normalized_ticker",
             "identifier",
+            "name",
+            "instrument_type",
+            "option_type",
+            "is_derivative",
             "position",
             "weight_pct",
             "current_exposure",
@@ -62,10 +71,6 @@ class KraneSharesExtractor(BaseETFExtractor):
                 raise RuntimeError("KMLM PDF does not have a second page for exposures.")
 
             page2_text = pdf.pages[1].extract_text() or ""
-
-        print("\n=== PAGE 2 RAW TEXT START ===")
-        print(page2_text)
-        print("=== PAGE 2 RAW TEXT END ===\n")
 
         lines = [self._clean_line(line) for line in page2_text.splitlines()]
         lines = [line for line in lines if line]
@@ -115,7 +120,6 @@ class KraneSharesExtractor(BaseETFExtractor):
                 continue
 
             if state == "fixed_header":
-                # The line immediately after "Fixed Income Exposures..." is still the last commodity row
                 if line.startswith("as of"):
                     state = "fixed"
                     continue
@@ -190,11 +194,6 @@ class KraneSharesExtractor(BaseETFExtractor):
         return None
 
     def _find_exposure_matches(self, line: str) -> list[dict]:
-        """
-        Finds one or two exposure rows inside a line, e.g.
-        GOLD 100 OZ FUTR JUN26 GCM6 Long 7.61% AUDUSD CRNCY FUT MAR26 ADH6 Long 16.5%
-        """
-
         pattern = re.compile(
             r"(?P<name>.+?)\s+"
             r"(?P<identifier>[A-Z0-9]{1,6}(?:\s[A-Z0-9]{1,4})?)\s+"
@@ -237,14 +236,6 @@ class KraneSharesExtractor(BaseETFExtractor):
         }
 
     def _parse_collateral_row(self, line: str, as_of_date: Optional[str]) -> Optional[dict]:
-        """
-        Parses lines like:
-        Cash USD 69,311,625 69,311,625 35.64%
-        B 03/31/26 US912797TB33 27,000,000 26,921,047 13.84%
-        JAPANESE YEN JPY 215,797,145 1,381,853 0.71%
-        """
-
-        # Remove trailing weight
         weight_match = re.search(r"(-?\d+(?:\.\d+)?)%$", line)
         if not weight_match:
             return None
@@ -253,18 +244,14 @@ class KraneSharesExtractor(BaseETFExtractor):
         prefix = line[:weight_match.start()].strip()
 
         tokens = prefix.split()
-
         if len(tokens) < 3:
             return None
 
-        # current exposure is the last numeric token before the percent
         current_exposure_token = tokens[-1].replace(",", "")
         current_exposure = pd.to_numeric(current_exposure_token, errors="coerce")
 
-        # Remove current exposure token
         tokens = tokens[:-1]
 
-        # Remove quantity/par value token if present
         if tokens and re.fullmatch(r"-?[\d,]+(?:\.\d+)?", tokens[-1]):
             tokens = tokens[:-1]
 
@@ -285,3 +272,37 @@ class KraneSharesExtractor(BaseETFExtractor):
             "weight_pct": weight_pct,
             "current_exposure": current_exposure,
         }
+
+    @staticmethod
+    def _normalize_identifier(identifier: str | None) -> str | None:
+        if identifier is None:
+            return None
+
+        text = str(identifier).strip()
+        if text == "" or text.lower() == "nan":
+            return None
+
+        # "JUN26 GCM6" -> "GCM6"
+        if " " in text:
+            parts = text.split()
+            return parts[-1]
+
+        return text
+
+    @staticmethod
+    def _classify_instrument(row: pd.Series) -> str:
+        section = str(row.get("section", "")).lower()
+        identifier = str(row.get("identifier", "")).upper()
+        name = str(row.get("name", "")).upper()
+
+        if section == "collateral":
+            if identifier.startswith("US"):
+                return "cash_collateral"
+            if identifier in {"USD", "JPY", "EUR", "GBP", "CAD"}:
+                return "currency"
+            return "cash_collateral"
+
+        if section in {"commodity", "currency", "fixed_income"}:
+            return "future"
+
+        return "other"
